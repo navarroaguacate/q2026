@@ -106,6 +106,17 @@
   .toast.show { transform: translateX(-50%) translateY(0); }
   .toast.error { background: #b91c1c; }
 
+
+  .btn-inline { padding: 10px 22px; background: var(--green); color: var(--gold); border: none; border-radius: 8px; font-family: 'Bebas Neue', sans-serif; font-size: 1.1rem; letter-spacing: 0.06em; cursor: pointer; white-space: nowrap; }
+  .btn-inline:hover { background: var(--green-mid); }
+  .btn-delete { background: #fee2e2; color: #b91c1c; border: 1px solid #fca5a5; border-radius: 6px; padding: 5px 14px; font-size: 0.8rem; font-weight: 600; cursor: pointer; transition: background 0.2s; }
+  .btn-delete:hover { background: #fca5a5; }
+  .admin-row { display: flex; align-items: center; justify-content: space-between; padding: 0.85rem 1.25rem; border-bottom: 1px solid var(--off-white); }
+  .admin-row:last-child { border-bottom: none; }
+  .admin-row:hover { background: var(--off-white); }
+  .admin-name { font-weight: 500; font-size: 0.95rem; }
+  .admin-meta { font-size: 0.8rem; color: var(--text-muted); margin-top: 2px; }
+
   @media (max-width: 600px) {
     .team span.name { display: none; }
     .match-card { padding: 0.6rem 0.75rem; }
@@ -125,6 +136,7 @@
   <button class="tab-btn active" onclick="showTab('predict',this)">🗳 Mis Pronósticos</button>
   <button class="tab-btn" onclick="showTab('results',this)">🏆 Tabla de Posiciones</button>
   <button class="tab-btn" onclick="showTab('actual',this)">⚽ Resultados Reales</button>
+  <button class="tab-btn" onclick="showTab('admin',this)">🔒 Admin</button>
 </div>
 
 <main>
@@ -175,6 +187,35 @@
     </div>
     <div id="actual-form"></div>
     <button class="btn-submit" id="btn-resultados" onclick="saveActualScores()">Guardar Resultados</button>
+  </div>
+
+
+  <!-- ADMIN -->
+  <div id="tab-admin" class="section">
+    <div class="actual-header">
+      <h2>🔒 Panel de Administrador</h2>
+      <p>Ingresa la contraseña para gestionar los participantes.</p>
+    </div>
+
+    <div id="admin-lock">
+      <div class="name-block">
+        <div>
+          <label for="admin-pw">Contraseña</label>
+          <input type="password" id="admin-pw" placeholder="••••••••" onkeydown="if(event.key==='Enter') unlockAdmin()">
+        </div>
+        <button class="btn-inline" onclick="unlockAdmin()">Entrar</button>
+      </div>
+    </div>
+
+    <div id="admin-panel" style="display:none">
+      <div class="leaderboard-table">
+        <div class="lb-header" style="justify-content:space-between">
+          <h2>👥 Participantes</h2>
+          <button class="btn-refresh" onclick="loadAdminList()">↻ Actualizar</button>
+        </div>
+        <div id="admin-list"></div>
+      </div>
+    </div>
   </div>
 
 </main>
@@ -540,6 +581,59 @@ async function saveActualScores() {
     showToast(`✅ ${res.saved} resultados guardados para todos`);
   } else {
     showToast('❌ Error al guardar. Verifica la URL del script.', true);
+  }
+}
+
+
+// ============================================================
+//  ADMIN
+// ============================================================
+const ADMIN_PASSWORD = "quiniela2026"; // ← cambia esto por tu contraseña
+
+function unlockAdmin() {
+  const pw = document.getElementById('admin-pw').value;
+  if (pw === ADMIN_PASSWORD) {
+    document.getElementById('admin-lock').style.display = 'none';
+    document.getElementById('admin-panel').style.display = 'block';
+    loadAdminList();
+  } else {
+    showToast('❌ Contraseña incorrecta', true);
+    document.getElementById('admin-pw').value = '';
+  }
+}
+
+async function loadAdminList() {
+  document.getElementById('admin-list').innerHTML = '<div class="spinner-wrap"><div class="spinner"></div> Cargando...</div>';
+  const data = await apiGet({ action: 'getLeaderboard' });
+  if (!data || !data.leaderboard) {
+    document.getElementById('admin-list').innerHTML = '<div class="no-entries">No se pudo cargar la lista.</div>';
+    return;
+  }
+  if (data.leaderboard.length === 0) {
+    document.getElementById('admin-list').innerHTML = '<div class="no-entries">No hay participantes aún.</div>';
+    return;
+  }
+  let html = '';
+  data.leaderboard.forEach(p => {
+    html += `<div class="admin-row">
+      <div>
+        <div class="admin-name">${p.name}</div>
+        <div class="admin-meta">${p.predicted} pronósticos &bull; ${p.totalPts} puntos</div>
+      </div>
+      <button class="btn-delete" onclick="deleteParticipant('${p.name.replace(/'/g, "\'")}')">🗑 Eliminar</button>
+    </div>`;
+  });
+  document.getElementById('admin-list').innerHTML = html;
+}
+
+async function deleteParticipant(name) {
+  if (!confirm(\`¿Seguro que quieres eliminar a "\${name}"? Esto borrará todos sus pronósticos.\`)) return;
+  const res = await apiPost({ action: 'deleteParticipant', name });
+  if (res && res.ok) {
+    showToast(\`✅ "\${name}" eliminado correctamente\`);
+    loadAdminList();
+  } else {
+    showToast('❌ Error al eliminar. Intenta de nuevo.', true);
   }
 }
 
