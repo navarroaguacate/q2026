@@ -31,16 +31,7 @@
   .section { display: none; }
   .section.active { display: block; }
 
-  /* SETUP BANNER */
-  .setup-banner { background: #fff8e1; border: 1.5px solid var(--gold); border-radius: 12px; padding: 1.25rem 1.5rem; margin-bottom: 2rem; }
-  .setup-banner h3 { font-family: 'Bebas Neue', sans-serif; font-size: 1.1rem; color: #7a5c0a; letter-spacing: 0.05em; margin-bottom: 6px; }
-  .setup-banner p { font-size: 0.85rem; color: #5a4a00; line-height: 1.6; }
-  .setup-banner input { margin-top: 10px; width: 100%; padding: 9px 12px; border: 1.5px solid var(--gold); border-radius: 8px; font-family: 'DM Sans', sans-serif; font-size: 0.9rem; background: #fffdf5; }
-  .setup-banner button { margin-top: 8px; padding: 8px 20px; background: var(--gold); color: #3a2a00; border: none; border-radius: 8px; font-family: 'Bebas Neue', sans-serif; font-size: 1rem; letter-spacing: 0.05em; cursor: pointer; }
-  .setup-banner button:hover { background: #b8911f; }
-  .url-status { margin-top: 8px; font-size: 0.8rem; font-weight: 600; }
-  .url-status.ok { color: var(--green-mid); }
-  .url-status.err { color: #b91c1c; }
+
 
   .name-block { background: var(--white); border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem; margin-bottom: 2rem; display: flex; gap: 1rem; align-items: flex-end; flex-wrap: wrap; }
   .name-block label { display: block; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); margin-bottom: 6px; }
@@ -141,16 +132,7 @@
   <!-- PRONÓSTICOS -->
   <div id="tab-predict" class="section active">
 
-    <div class="setup-banner" id="setup-banner">
-      <h3>⚙️ Paso 1 — Conecta tu Google Apps Script</h3>
-      <p>Despliega el script en Google Apps Script y pega aquí la URL del Web App para activar la base de datos compartida.</p>
-      <input type="text" id="script-url-input" placeholder="https://script.google.com/macros/s/XXXX/exec">
-      <br>
-      <button onclick="saveScriptUrl()">Guardar URL</button>
-      <div class="url-status" id="url-status"></div>
-    </div>
-
-    <div class="name-block">
+<div class="name-block">
       <div>
         <label for="player-name">Tu nombre</label>
         <input type="text" id="player-name" placeholder="Ej. Ana García" autocomplete="off">
@@ -281,7 +263,7 @@ const MATCHES = [
 // ============================================================
 //  CONFIGURACIÓN — URL del Web App
 // ============================================================
-let SCRIPT_URL = localStorage.getItem('q2026_script_url') || '';
+let SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxRRke6MKqVcIo6zWEy5EhACfOQlg5Sl-Hr_MmE_FcHTZF_BRNkmZqT2dVHTfprM8AyBw/exec';
 
 function saveScriptUrl() {
   const val = document.getElementById('script-url-input').value.trim();
@@ -564,7 +546,6 @@ async function saveActualScores() {
 // ============================================================
 //  INIT
 // ============================================================
-checkUrlOnLoad();
 buildPredictForm();
 </script>
 </body>
