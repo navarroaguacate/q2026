@@ -164,7 +164,6 @@
 
 <header>
   <h1>Quiniela 2026</h1>
-  <p>Copa Mundial FIFA &mdash; Estados Unidos &bull; Canadá &bull; México</p>
 </header>
 
 <div class="tabs">
@@ -222,12 +221,23 @@
 
   <!-- RESULTADOS REALES -->
   <div id="tab-actual" class="section">
-    <div class="actual-header">
-      <h2>Ingresar Resultados Oficiales</h2>
-      <p>Completa el marcador real de cada partido al terminar. La tabla de posiciones se actualiza para todos automáticamente.</p>
+    <!-- PUBLIC: read-only view -->
+    <div id="actual-readonly">
+      <div class="actual-header">
+        <h2>⚽ Resultados Oficiales</h2>
+        <p>Marcadores reales de cada partido. Solo el administrador puede editarlos.</p>
+      </div>
+      <div id="actual-view"></div>
     </div>
-    <div id="actual-form"></div>
-    <button class="btn-submit" id="btn-resultados" onclick="saveActualScores()">Guardar Resultados</button>
+    <!-- ADMIN: edit mode, shown only when admin unlocked -->
+    <div id="actual-edit" style="display:none">
+      <div class="actual-header" style="border-color:var(--gold);background:var(--gold-light)">
+        <h2>✏️ Editar Resultados</h2>
+        <p>Modo administrador activo. Puedes ingresar o modificar los marcadores reales.</p>
+      </div>
+      <div id="actual-form"></div>
+      <button class="btn-submit" id="btn-resultados" onclick="saveActualScores()">Guardar Resultados</button>
+    </div>
   </div>
 
   <!-- ADMIN -->
@@ -274,7 +284,7 @@
 // ============================================================
 //  CONFIGURACIÓN
 // ============================================================
-const SCRIPT_URL     = 'https://script.google.com/macros/s/AKfycbwqqw0o0v55gnm4R96SgzdH9ESapn5TVIOWBmrpLgVSX956IbXOKtxkaEsRKeqcDxZHRw/exec';
+const SCRIPT_URL     = 'https://script.google.com/macros/s/AKfycbxRRke6MKqVcIo6zWEy5EhACfOQlg5Sl-Hr_MmE_FcHTZF_BRNkmZqT2dVHTfprM8AyBw/exec';
 const ADMIN_PASSWORD = 'quiniela2026'; // ← cambia esto por tu contraseña
 
 // ============================================================
@@ -642,9 +652,39 @@ function closeModal(e) {
 //  RESULTADOS REALES
 // ============================================================
 async function loadAndRenderActualForm() {
-  spinner('actual-form');
+  spinner('actual-view');
   const actual = await apiGet({ action: 'getActual' });
-  renderActualForm(actual || {});
+  renderActualReadOnly(actual || {});
+  // If admin is already unlocked, also load the edit form
+  if (adminUnlocked) {
+    renderActualForm(actual || {});
+  }
+}
+
+function renderActualReadOnly(actual) {
+  const groups = [...new Set(MATCHES.map(m => m.group))];
+  let html = '';
+  let anyPlayed = false;
+  groups.forEach(g => {
+    const played = MATCHES.filter(m => m.group === g && actual[m.id]);
+    if (!played.length) return;
+    anyPlayed = true;
+    html += `<div class="group-header"><span class="group-badge">Grupo ${g}</span><hr></div>`;
+    MATCHES.filter(m => m.group === g).forEach(m => {
+      const a = actual[m.id];
+      if (!a) return;
+      html += `<div class="actual-match">
+        <span class="match-date">${m.date}</span>
+        <div class="team home"><span class="flag">${m.homeFlag}</span><span class="name">${m.home}</span></div>
+        <div class="score-inputs" style="padding-top:14px">
+          <span style="font-family:'Bebas Neue';font-size:1.8rem;color:var(--green);letter-spacing:0.05em">${a.home} — ${a.away}</span>
+        </div>
+        <div class="team away"><span class="flag">${m.awayFlag}</span><span class="name">${m.away}</span></div>
+      </div>`;
+    });
+  });
+  if (!anyPlayed) html = '<div class="no-entries">Aún no hay partidos jugados.</div>';
+  document.getElementById('actual-view').innerHTML = html;
 }
 
 function renderActualForm(actual) {
@@ -688,12 +728,19 @@ async function saveActualScores() {
 // ============================================================
 //  ADMIN
 // ============================================================
+let adminUnlocked = false;
+
 function unlockAdmin() {
   const pw = document.getElementById('admin-pw').value;
   if (pw === ADMIN_PASSWORD) {
+    adminUnlocked = true;
     document.getElementById('admin-lock').style.display = 'none';
     document.getElementById('admin-panel').style.display = 'block';
+    // Show edit form in results tab too
+    document.getElementById('actual-edit').style.display = 'block';
     loadAdminList();
+    // Load edit form if user is currently on actual tab
+    loadAndRenderActualForm();
   } else {
     showToast('❌ Contraseña incorrecta', true);
     document.getElementById('admin-pw').value = '';
