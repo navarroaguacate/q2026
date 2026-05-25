@@ -285,8 +285,6 @@
 //  CONFIGURACIÓN
 // ============================================================
 const SCRIPT_URL     = 'https://script.google.com/macros/s/AKfycbxRRke6MKqVcIo6zWEy5EhACfOQlg5Sl-Hr_MmE_FcHTZF_BRNkmZqT2dVHTfprM8AyBw/exec';
-const ADMIN_PASSWORD = 'quiniela2026'; // ← cambia esto por tu contraseña
-
 // ============================================================
 //  PARTIDOS
 // ============================================================
@@ -730,16 +728,22 @@ async function saveActualScores() {
 // ============================================================
 let adminUnlocked = false;
 
-function unlockAdmin() {
-  const pw = document.getElementById('admin-pw').value;
-  if (pw === ADMIN_PASSWORD) {
+async function unlockAdmin() {
+  const pw  = document.getElementById('admin-pw').value.trim();
+  const btn = document.querySelector('#admin-lock .btn-unlock');
+  if (!pw) { showToast('⚠ Ingresa la contraseña', true); return; }
+
+  btn.disabled = true; btn.textContent = 'Verificando...';
+  const res = await apiPost({ action: 'checkPassword', password: pw });
+  btn.disabled = false; btn.textContent = 'Entrar';
+
+  if (res && res.ok) {
     adminUnlocked = true;
     document.getElementById('admin-lock').style.display = 'none';
     document.getElementById('admin-panel').style.display = 'block';
     // Show edit form in results tab too
     document.getElementById('actual-edit').style.display = 'block';
     loadAdminList();
-    // Load edit form if user is currently on actual tab
     loadAndRenderActualForm();
   } else {
     showToast('❌ Contraseña incorrecta', true);
