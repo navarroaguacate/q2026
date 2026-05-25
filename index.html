@@ -23,7 +23,7 @@
   header p { color: rgba(255,255,255,0.7); font-size: 0.95rem; margin-top: 0.5rem; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 500; position: relative; }
 
   .tabs { display: flex; background: var(--green); border-top: 1px solid rgba(255,255,255,0.1); flex-wrap: wrap; }
-  .tab-btn { flex: 1; min-width: 120px; padding: 1rem 0.5rem; background: none; border: none; cursor: pointer; font-family: 'Bebas Neue', sans-serif; font-size: 1rem; letter-spacing: 0.08em; color: rgba(255,255,255,0.5); transition: all 0.2s; border-bottom: 3px solid transparent; }
+  .tab-btn { flex: 1; min-width: 110px; padding: 1rem 0.5rem; background: none; border: none; cursor: pointer; font-family: 'Bebas Neue', sans-serif; font-size: 1rem; letter-spacing: 0.08em; color: rgba(255,255,255,0.5); transition: all 0.2s; border-bottom: 3px solid transparent; }
   .tab-btn.active { color: var(--gold); border-bottom-color: var(--gold); }
   .tab-btn:hover:not(.active) { color: rgba(255,255,255,0.8); }
 
@@ -31,11 +31,18 @@
   .section { display: none; }
   .section.active { display: block; }
 
+  /* NAME BLOCK */
   .name-block { background: var(--white); border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem; margin-bottom: 2rem; display: flex; gap: 1rem; align-items: flex-end; flex-wrap: wrap; }
   .name-block label { display: block; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); margin-bottom: 6px; }
   .name-block input { padding: 10px 14px; border: 1.5px solid var(--border); border-radius: 8px; font-family: 'DM Sans', sans-serif; font-size: 1rem; width: 280px; background: var(--off-white); transition: border-color 0.2s; }
   .name-block input:focus { outline: none; border-color: var(--green-mid); }
 
+  /* LOCKED WARNING */
+  .locked-warning { background: #fff3cd; border: 1.5px solid #f0a500; border-radius: 12px; padding: 1.25rem 1.5rem; margin-bottom: 2rem; display: none; }
+  .locked-warning h3 { font-family: 'Bebas Neue', sans-serif; font-size: 1.2rem; color: #7a4f00; letter-spacing: 0.05em; margin-bottom: 4px; }
+  .locked-warning p { font-size: 0.88rem; color: #5a3a00; line-height: 1.6; }
+
+  /* POINTS LEGEND */
   .points-legend { background: var(--white); border: 1px solid var(--border); border-radius: 12px; padding: 1.25rem 1.5rem; margin-bottom: 2rem; }
   .points-legend h3 { font-family: 'Bebas Neue', sans-serif; font-size: 1.2rem; letter-spacing: 0.06em; color: var(--green); margin-bottom: 0.75rem; }
   .legend-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 6px; }
@@ -43,17 +50,18 @@
   .pts-badge { font-family: 'Bebas Neue', sans-serif; font-size: 1rem; letter-spacing: 0.05em; min-width: 36px; height: 28px; display: flex; align-items: center; justify-content: center; border-radius: 6px; color: white; flex-shrink: 0; }
   .pts5 { background: var(--pts5); } .pts4 { background: var(--pts4); } .pts3 { background: var(--pts3); } .pts1 { background: var(--pts1); }
 
+  /* MATCHES */
   .group-header { display: flex; align-items: center; gap: 1rem; margin: 2rem 0 0.75rem; }
   .group-badge { font-family: 'Bebas Neue', sans-serif; font-size: 1.4rem; letter-spacing: 0.06em; background: var(--green); color: var(--gold); padding: 0.25rem 0.9rem; border-radius: 6px; }
   .group-header hr { flex: 1; border: none; border-top: 1px solid var(--border); }
 
   .match-card { background: var(--white); border: 1px solid var(--border); border-radius: 10px; padding: 0.75rem 1.25rem; margin-bottom: 0.6rem; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 0.5rem; transition: border-color 0.2s; position: relative; }
   .match-card:hover { border-color: var(--green-mid); }
+  .match-card.locked-card { background: var(--off-white); pointer-events: none; opacity: 0.75; }
   .match-date { position: absolute; top: 6px; left: 50%; transform: translateX(-50%); font-size: 0.68rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.07em; color: var(--text-muted); white-space: nowrap; }
   .team { display: flex; align-items: center; gap: 10px; font-weight: 500; font-size: 0.9rem; padding-top: 14px; }
   .team.away { flex-direction: row-reverse; }
   .flag { font-size: 1.35rem; line-height: 1; }
-
   .score-inputs { display: flex; align-items: center; gap: 8px; padding-top: 14px; }
   .score-inputs input[type=number] { width: 48px; height: 44px; text-align: center; font-size: 1.25rem; font-weight: 600; border: 1.5px solid var(--border); border-radius: 8px; font-family: 'DM Sans', sans-serif; background: var(--off-white); transition: border-color 0.2s, background 0.2s; -moz-appearance: textfield; }
   .score-inputs input[type=number]::-webkit-outer-spin-button,
@@ -61,16 +69,17 @@
   .score-inputs input[type=number]:focus { outline: none; border-color: var(--green-mid); background: var(--white); }
   .vs { font-family: 'Bebas Neue', sans-serif; font-size: 1rem; color: var(--text-muted); letter-spacing: 0.05em; }
 
+  /* BUTTONS */
   .btn-submit { display: block; width: 100%; margin-top: 2.5rem; padding: 1rem; background: var(--green); color: var(--gold); border: none; border-radius: 10px; font-family: 'Bebas Neue', sans-serif; font-size: 1.4rem; letter-spacing: 0.1em; cursor: pointer; transition: background 0.2s, transform 0.1s; }
   .btn-submit:hover { background: var(--green-mid); }
   .btn-submit:active { transform: scale(0.99); }
   .btn-submit:disabled { opacity: 0.5; cursor: not-allowed; }
 
+  /* LEADERBOARD */
   .results-top { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; margin-bottom: 2rem; }
   .stat-card { background: var(--white); border: 1px solid var(--border); border-radius: 10px; padding: 1rem 1.25rem; text-align: center; }
   .stat-card .num { font-family: 'Bebas Neue', sans-serif; font-size: 2.5rem; color: var(--green); line-height: 1; }
   .stat-card .lbl { font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); margin-top: 4px; }
-
   .leaderboard-table { background: var(--white); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; margin-bottom: 2rem; }
   .lb-header { background: var(--green); padding: 1rem 1.5rem; display: flex; align-items: center; justify-content: space-between; }
   .lb-header h2 { font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; color: var(--gold); letter-spacing: 0.06em; }
@@ -88,7 +97,10 @@
   .rank.gold { color: #c9a227; } .rank.silver { color: #8a8a8a; } .rank.bronze { color: #a05a2c; }
   .leader-badge { display: inline-block; background: var(--gold-light); color: #7a5c0a; font-size: 0.7rem; font-weight: 600; padding: 2px 8px; border-radius: 20px; margin-left: 6px; }
   .no-entries { text-align: center; padding: 3rem; color: var(--text-muted); font-size: 0.95rem; }
+  .btn-view { background: var(--green-light); color: var(--green); border: 1px solid #b2d8bc; border-radius: 6px; padding: 5px 12px; font-size: 0.78rem; font-weight: 600; cursor: pointer; white-space: nowrap; transition: background 0.2s; margin-left: 6px; }
+  .btn-view:hover { background: #c8ecd0; }
 
+  /* ACTUAL SCORES */
   .actual-header { background: var(--white); border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem; margin-bottom: 1.5rem; }
   .actual-header p { color: var(--text-muted); font-size: 0.9rem; margin-top: 6px; }
   .actual-header h2 { font-family: 'Bebas Neue', sans-serif; font-size: 1.6rem; letter-spacing: 0.04em; }
@@ -111,10 +123,30 @@
   .btn-delete { background: #fee2e2; color: #b91c1c; border: 1px solid #fca5a5; border-radius: 6px; padding: 6px 16px; font-size: 0.82rem; font-weight: 600; cursor: pointer; white-space: nowrap; transition: background 0.2s; flex-shrink: 0; }
   .btn-delete:hover { background: #fca5a5; }
 
+  /* MODAL */
+  .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.55); z-index: 500; align-items: center; justify-content: center; padding: 1rem; }
+  .modal-overlay.open { display: flex; }
+  .modal { background: var(--white); border-radius: 14px; width: 100%; max-width: 680px; max-height: 85vh; overflow-y: auto; box-shadow: 0 20px 60px rgba(0,0,0,0.25); }
+  .modal-header { background: var(--green); padding: 1.25rem 1.5rem; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; border-radius: 14px 14px 0 0; }
+  .modal-header h3 { font-family: 'Bebas Neue', sans-serif; font-size: 1.4rem; color: var(--gold); letter-spacing: 0.05em; }
+  .modal-close { background: rgba(255,255,255,0.15); color: white; border: none; border-radius: 6px; width: 32px; height: 32px; font-size: 1.1rem; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+  .modal-close:hover { background: rgba(255,255,255,0.25); }
+  .modal-body { padding: 1.25rem 1.5rem; }
+  .pred-group-header { font-family: 'Bebas Neue', sans-serif; font-size: 1.1rem; color: var(--green); letter-spacing: 0.05em; margin: 1.25rem 0 0.5rem; padding-bottom: 4px; border-bottom: 1px solid var(--border); }
+  .pred-row { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 0.5rem; padding: 0.55rem 0.25rem; border-bottom: 1px solid var(--off-white); font-size: 0.88rem; }
+  .pred-row:last-child { border-bottom: none; }
+  .pred-team { display: flex; align-items: center; gap: 6px; font-weight: 500; }
+  .pred-team.away { flex-direction: row-reverse; }
+  .pred-score { font-family: 'Bebas Neue', sans-serif; font-size: 1.3rem; color: var(--green); letter-spacing: 0.05em; text-align: center; white-space: nowrap; }
+  .pred-row.not-predicted { opacity: 0.4; }
+  .pred-row.not-predicted .pred-score { color: var(--text-muted); font-size: 1rem; }
+
+  /* SPINNER */
   .spinner-wrap { display: flex; align-items: center; justify-content: center; gap: 10px; padding: 2rem; color: var(--text-muted); font-size: 0.9rem; }
   .spinner { width: 20px; height: 20px; border: 2px solid var(--border); border-top-color: var(--green-mid); border-radius: 50%; animation: spin 0.7s linear infinite; }
   @keyframes spin { to { transform: rotate(360deg); } }
 
+  /* TOAST */
   .toast { position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%) translateY(100px); background: var(--green); color: var(--white); padding: 0.8rem 1.5rem; border-radius: 8px; font-weight: 500; font-size: 0.9rem; transition: transform 0.3s ease; z-index: 1000; white-space: nowrap; }
   .toast.show { transform: translateX(-50%) translateY(0); }
   .toast.error { background: #b91c1c; }
@@ -124,6 +156,7 @@
     .match-card { padding: 0.6rem 0.75rem; }
     .name-block input { width: 100%; }
     td { padding: 0.65rem 0.6rem; font-size: 0.82rem; }
+    .modal { border-radius: 10px; }
   }
 </style>
 </head>
@@ -145,12 +178,20 @@
 
   <!-- PRONÓSTICOS -->
   <div id="tab-predict" class="section active">
+
     <div class="name-block">
       <div>
         <label for="player-name">Tu nombre</label>
-        <input type="text" id="player-name" placeholder="Ej. Ana García" autocomplete="off">
+        <input type="text" id="player-name" placeholder="Ej. Ana García" autocomplete="off" oninput="checkIfLocked()">
       </div>
     </div>
+
+    <!-- Warning shown when name already has predictions -->
+    <div class="locked-warning" id="locked-warning">
+      <h3>🔒 Ya tienes pronósticos guardados</h3>
+      <p>El nombre <strong id="locked-name"></strong> ya tiene pronósticos registrados. No es posible modificarlos una vez enviados. Si cometiste un error, contacta al administrador.</p>
+    </div>
+
     <div class="points-legend">
       <h3>⭐ Sistema de Puntos</h3>
       <div class="legend-grid">
@@ -162,6 +203,7 @@
         <div class="legend-row"><span class="pts-badge pts1">1 pt</span>  Solo los goles de un equipo correctos</div>
       </div>
     </div>
+
     <div id="matches-form"></div>
     <button class="btn-submit" id="btn-guardar" onclick="submitPredictions()">Guardar mis Pronósticos</button>
   </div>
@@ -190,8 +232,6 @@
 
   <!-- ADMIN -->
   <div id="tab-admin" class="section">
-
-    <!-- LOCKED STATE -->
     <div id="admin-lock">
       <div class="admin-lock-box">
         <h3>🔒 Área de Admin</h3>
@@ -200,12 +240,10 @@
         <button class="btn-unlock" onclick="unlockAdmin()">Entrar</button>
       </div>
     </div>
-
-    <!-- UNLOCKED STATE -->
     <div id="admin-panel" style="display:none">
       <div class="actual-header">
         <h2>👥 Gestionar Participantes</h2>
-        <p>Puedes eliminar a cualquier participante y todos sus pronósticos.</p>
+        <p>Puedes ver o eliminar los pronósticos de cualquier participante.</p>
       </div>
       <div class="leaderboard-table">
         <div class="lb-header">
@@ -215,10 +253,20 @@
         <div id="admin-list"></div>
       </div>
     </div>
-
   </div>
 
 </main>
+
+<!-- MODAL: Ver Pronósticos -->
+<div class="modal-overlay" id="pred-modal" onclick="closeModal(event)">
+  <div class="modal">
+    <div class="modal-header">
+      <h3 id="modal-title">Pronósticos</h3>
+      <button class="modal-close" onclick="document.getElementById('pred-modal').classList.remove('open')">✕</button>
+    </div>
+    <div class="modal-body" id="modal-body"></div>
+  </div>
+</div>
 
 <div class="toast" id="toast"></div>
 
@@ -226,7 +274,7 @@
 // ============================================================
 //  CONFIGURACIÓN
 // ============================================================
-const SCRIPT_URL     = 'https://script.google.com/macros/s/AKfycbwAyXbocOPntuw_xkjoPPkRi6hLkq0s15FFpqCE6Uo7TOhRAFm4TBlnI5-e_k6uVh7JHw/exec';
+const SCRIPT_URL     = 'https://script.google.com/macros/s/AKfycbxRRke6MKqVcIo6zWEy5EhACfOQlg5Sl-Hr_MmE_FcHTZF_BRNkmZqT2dVHTfprM8AyBw/exec';
 const ADMIN_PASSWORD = 'quiniela2026'; // ← cambia esto por tu contraseña
 
 // ============================================================
@@ -315,7 +363,6 @@ async function apiGet(params) {
   const res = await fetch(url);
   return res.json();
 }
-
 async function apiPost(body) {
   const res = await fetch(SCRIPT_URL, { method: 'POST', body: JSON.stringify(body) });
   return res.json();
@@ -356,7 +403,7 @@ function showToast(msg, isError) {
   const t = document.getElementById('toast');
   t.textContent = msg;
   t.className = 'toast show' + (isError ? ' error' : '');
-  setTimeout(() => t.className = 'toast', 3000);
+  setTimeout(() => t.className = 'toast', 3500);
 }
 
 function spinner(id) {
@@ -364,7 +411,61 @@ function spinner(id) {
 }
 
 // ============================================================
-//  PRONÓSTICOS
+//  LOCK CHECK — when user types their name
+// ============================================================
+let lockCheckTimer = null;
+let knownParticipants = []; // cached from leaderboard
+
+async function checkIfLocked() {
+  const name = document.getElementById('player-name').value.trim().toLowerCase();
+  const warning = document.getElementById('locked-warning');
+  const btn     = document.getElementById('btn-guardar');
+
+  if (!name) {
+    warning.style.display = 'none';
+    btn.disabled = false;
+    unlockFormCards();
+    return;
+  }
+
+  clearTimeout(lockCheckTimer);
+  lockCheckTimer = setTimeout(async () => {
+    // Check against cached list first (fast)
+    const found = knownParticipants.find(p => p.toLowerCase() === name);
+    if (found) {
+      showLockedState(found);
+    } else {
+      // Ask server to be sure
+      const data = await apiGet({ action: 'checkExists', name });
+      if (data && data.exists) {
+        showLockedState(data.name);
+        if (!knownParticipants.includes(data.name)) knownParticipants.push(data.name);
+      } else {
+        warning.style.display = 'none';
+        btn.disabled = false;
+        unlockFormCards();
+      }
+    }
+  }, 600);
+}
+
+function showLockedState(name) {
+  const warning = document.getElementById('locked-warning');
+  document.getElementById('locked-name').textContent = name;
+  warning.style.display = 'block';
+  document.getElementById('btn-guardar').disabled = true;
+  lockFormCards();
+}
+
+function lockFormCards() {
+  document.querySelectorAll('.match-card').forEach(c => c.classList.add('locked-card'));
+}
+function unlockFormCards() {
+  document.querySelectorAll('.match-card').forEach(c => c.classList.remove('locked-card'));
+}
+
+// ============================================================
+//  PRONÓSTICOS FORM
 // ============================================================
 function buildPredictForm() {
   const groups = [...new Set(MATCHES.map(m => m.group))];
@@ -398,6 +499,15 @@ function markCard(id) {
 async function submitPredictions() {
   const name = document.getElementById('player-name').value.trim();
   if (!name) { showToast('⚠ Por favor ingresa tu nombre primero', true); return; }
+
+  // Double-check server lock
+  const check = await apiGet({ action: 'checkExists', name });
+  if (check && check.exists) {
+    showLockedState(check.name);
+    showToast('🔒 Ya tienes pronósticos guardados. No se pueden modificar.', true);
+    return;
+  }
+
   const predictions = {};
   let filled = 0;
   MATCHES.forEach(m => {
@@ -406,12 +516,15 @@ async function submitPredictions() {
     if (h !== '' && a !== '') { predictions[m.id] = { home: parseInt(h), away: parseInt(a) }; filled++; }
   });
   if (filled === 0) { showToast('⚠ Pronostica al menos un partido', true); return; }
+
   const btn = document.getElementById('btn-guardar');
   btn.disabled = true; btn.textContent = 'Guardando...';
   const res = await apiPost({ action: 'savePrediction', name, predictions });
-  btn.disabled = false; btn.textContent = 'Guardar mis Pronósticos';
+  btn.textContent = 'Guardar mis Pronósticos';
+
   if (res && res.ok) {
-    showToast(`✅ ${filled} pronósticos guardados para ${name}`);
+    showToast('✅ ' + filled + ' pronósticos guardados para ' + name);
+    knownParticipants.push(name);
     document.getElementById('player-name').value = '';
     MATCHES.forEach(m => {
       document.getElementById('h-' + m.id).value = '';
@@ -419,25 +532,32 @@ async function submitPredictions() {
       const card = document.getElementById('card-' + m.id);
       card.style.borderColor = ''; card.style.background = '';
     });
+    document.getElementById('locked-warning').style.display = 'none';
   } else {
     showToast('❌ Error al guardar. Verifica la conexión.', true);
+    btn.disabled = false;
   }
 }
 
 // ============================================================
-//  TABLA DE POSICIONES
+//  LEADERBOARD
 // ============================================================
 async function renderLeaderboard() {
   spinner('stats-cards'); spinner('leaderboard-body');
   const data = await apiGet({ action: 'getLeaderboard' });
   if (!data) return;
   const { leaderboard, totalActual } = data;
+
+  // Cache participant names for lock check
+  knownParticipants = leaderboard.map(p => p.name);
+
   const topPts = leaderboard.length > 0 ? leaderboard[0].totalPts : 0;
   document.getElementById('stats-cards').innerHTML = `
     <div class="stat-card"><div class="num">${leaderboard.length}</div><div class="lbl">Participantes</div></div>
     <div class="stat-card"><div class="num">${totalActual}</div><div class="lbl">Partidos jugados</div></div>
     <div class="stat-card"><div class="num">${MATCHES.length - totalActual}</div><div class="lbl">Partidos restantes</div></div>
     <div class="stat-card"><div class="num">${topPts}</div><div class="lbl">Puntaje más alto</div></div>`;
+
   if (leaderboard.length === 0) {
     document.getElementById('leaderboard-body').innerHTML = '<div class="no-entries">Aún no hay pronósticos — ¡sé el primero!</div>';
     return;
@@ -446,9 +566,14 @@ async function renderLeaderboard() {
   let rows = '';
   leaderboard.forEach((p, i) => {
     const crown = i === 0 && p.totalPts > 0 ? ' 👑' : '';
+    const safeName = p.name.replace(/"/g, '&quot;');
     rows += `<tr>
       <td><span class="rank ${ranks[i]||''}">${i+1}</span></td>
-      <td><strong>${p.name}</strong>${crown}${i===0&&p.totalPts>0?'<span class="leader-badge">Líder</span>':''}</td>
+      <td>
+        <strong>${p.name}</strong>${crown}
+        ${i===0&&p.totalPts>0?'<span class="leader-badge">Líder</span>':''}
+        <button class="btn-view" onclick="viewPredictions(&quot;${safeName}&quot;)">👁 Ver</button>
+      </td>
       <td class="num">${p.predicted}</td>
       <td class="num">${p.evaluated}</td>
       <td class="num" style="color:var(--green-mid);font-size:1.05rem">${p.totalPts}</td>
@@ -459,6 +584,58 @@ async function renderLeaderboard() {
       <thead><tr><th>#</th><th>Jugador</th><th class="num">Pronosticados</th><th class="num">Evaluados</th><th class="num">Puntos</th></tr></thead>
       <tbody>${rows}</tbody>
     </table>`;
+}
+
+// ============================================================
+//  VER PRONÓSTICOS — MODAL
+// ============================================================
+async function viewPredictions(name) {
+  document.getElementById('modal-title').textContent = '📋 Pronósticos de ' + name;
+  document.getElementById('modal-body').innerHTML = '<div class="spinner-wrap"><div class="spinner"></div> Cargando...</div>';
+  document.getElementById('pred-modal').classList.add('open');
+
+  const data = await apiGet({ action: 'getPrediction', name });
+  const actual = await apiGet({ action: 'getActual' });
+  if (!data) { document.getElementById('modal-body').innerHTML = '<p style="padding:1rem;color:#b91c1c">Error al cargar.</p>'; return; }
+
+  const preds = data.predictions || {};
+  const groups = [...new Set(MATCHES.map(m => m.group))];
+  let html = '';
+
+  groups.forEach(g => {
+    const gMatches = MATCHES.filter(m => m.group === g);
+    const hasPred = gMatches.some(m => preds[m.id] !== undefined);
+    if (!hasPred) return;
+
+    html += `<div class="pred-group-header">Grupo ${g}</div>`;
+    gMatches.forEach(m => {
+      const p = preds[m.id];
+      const a = actual && actual[m.id];
+      if (!p) return;
+
+      let pts = '';
+      if (a) {
+        const score = calcMatchPoints(p, a);
+        const colors = { 5: 'var(--pts5)', 4: 'var(--pts4)', 3: 'var(--pts3)', 1: 'var(--pts1)', 0: '#aaa' };
+        pts = `<span style="font-family:'Bebas Neue';font-size:0.9rem;background:${colors[score]};color:white;padding:2px 8px;border-radius:4px;margin-left:6px">${score}pts</span>`;
+      }
+
+      html += `<div class="pred-row">
+        <div class="pred-team"><span>${m.homeFlag}</span><span>${m.home}</span></div>
+        <div class="pred-score">${p.home} — ${p.away}${pts}</div>
+        <div class="pred-team away"><span>${m.awayFlag}</span><span>${m.away}</span></div>
+      </div>`;
+    });
+  });
+
+  if (!html) html = '<p style="padding:1rem;color:var(--text-muted)">No hay pronósticos registrados.</p>';
+  document.getElementById('modal-body').innerHTML = html;
+}
+
+function closeModal(e) {
+  if (e.target === document.getElementById('pred-modal')) {
+    document.getElementById('pred-modal').classList.remove('open');
+  }
 }
 
 // ============================================================
@@ -504,7 +681,7 @@ async function saveActualScores() {
   btn.disabled = true; btn.textContent = 'Guardando...';
   const res = await apiPost({ action: 'saveActual', scores });
   btn.disabled = false; btn.textContent = 'Guardar Resultados';
-  if (res && res.ok) showToast(`✅ ${res.saved} resultados guardados para todos`);
+  if (res && res.ok) showToast('✅ ' + res.saved + ' resultados guardados para todos');
   else showToast('❌ Error al guardar.', true);
 }
 
@@ -553,6 +730,7 @@ async function deleteParticipant(name) {
   const res = await apiPost({ action: 'deleteParticipant', name });
   if (res && res.ok) {
     showToast('✅ "' + name + '" eliminado correctamente');
+    knownParticipants = knownParticipants.filter(n => n.toLowerCase() !== name.toLowerCase());
     loadAdminList();
   } else {
     showToast('❌ Error al eliminar. Intenta de nuevo.', true);
