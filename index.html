@@ -22,16 +22,14 @@
   header h1 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.8rem, 8vw, 5rem); color: var(--gold); letter-spacing: 0.04em; line-height: 1; position: relative; }
   header p { color: rgba(255,255,255,0.7); font-size: 0.95rem; margin-top: 0.5rem; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 500; position: relative; }
 
-  .tabs { display: flex; background: var(--green); border-top: 1px solid rgba(255,255,255,0.1); }
-  .tab-btn { flex: 1; padding: 1rem; background: none; border: none; cursor: pointer; font-family: 'Bebas Neue', sans-serif; font-size: 1.1rem; letter-spacing: 0.08em; color: rgba(255,255,255,0.5); transition: all 0.2s; border-bottom: 3px solid transparent; }
+  .tabs { display: flex; background: var(--green); border-top: 1px solid rgba(255,255,255,0.1); flex-wrap: wrap; }
+  .tab-btn { flex: 1; min-width: 120px; padding: 1rem 0.5rem; background: none; border: none; cursor: pointer; font-family: 'Bebas Neue', sans-serif; font-size: 1rem; letter-spacing: 0.08em; color: rgba(255,255,255,0.5); transition: all 0.2s; border-bottom: 3px solid transparent; }
   .tab-btn.active { color: var(--gold); border-bottom-color: var(--gold); }
   .tab-btn:hover:not(.active) { color: rgba(255,255,255,0.8); }
 
   main { max-width: 980px; margin: 0 auto; padding: 2rem 1rem; }
   .section { display: none; }
   .section.active { display: block; }
-
-
 
   .name-block { background: var(--white); border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem; margin-bottom: 2rem; display: flex; gap: 1rem; align-items: flex-end; flex-wrap: wrap; }
   .name-block label { display: block; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); margin-bottom: 6px; }
@@ -52,11 +50,11 @@
   .match-card { background: var(--white); border: 1px solid var(--border); border-radius: 10px; padding: 0.75rem 1.25rem; margin-bottom: 0.6rem; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 0.5rem; transition: border-color 0.2s; position: relative; }
   .match-card:hover { border-color: var(--green-mid); }
   .match-date { position: absolute; top: 6px; left: 50%; transform: translateX(-50%); font-size: 0.68rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.07em; color: var(--text-muted); white-space: nowrap; }
-  .team { display: flex; align-items: center; gap: 10px; font-weight: 500; font-size: 0.9rem; }
+  .team { display: flex; align-items: center; gap: 10px; font-weight: 500; font-size: 0.9rem; padding-top: 14px; }
   .team.away { flex-direction: row-reverse; }
   .flag { font-size: 1.35rem; line-height: 1; }
 
-  .score-inputs { display: flex; align-items: center; gap: 8px; }
+  .score-inputs { display: flex; align-items: center; gap: 8px; padding-top: 14px; }
   .score-inputs input[type=number] { width: 48px; height: 44px; text-align: center; font-size: 1.25rem; font-weight: 600; border: 1.5px solid var(--border); border-radius: 8px; font-family: 'DM Sans', sans-serif; background: var(--off-white); transition: border-color 0.2s, background 0.2s; -moz-appearance: textfield; }
   .score-inputs input[type=number]::-webkit-outer-spin-button,
   .score-inputs input[type=number]::-webkit-inner-spin-button { -webkit-appearance: none; }
@@ -97,7 +95,22 @@
   .actual-match { background: var(--white); border: 1px solid var(--border); border-radius: 10px; padding: 0.75rem 1.25rem; margin-bottom: 0.6rem; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 0.5rem; position: relative; }
   .played-badge { display: inline-block; background: var(--green-light); color: var(--green-mid); font-size: 0.68rem; font-weight: 600; padding: 2px 7px; border-radius: 20px; text-transform: uppercase; letter-spacing: 0.05em; margin-left: 6px; }
 
-  /* LOADING SPINNER */
+  /* ADMIN */
+  .admin-lock-box { background: var(--white); border: 1px solid var(--border); border-radius: 12px; padding: 2rem; max-width: 380px; margin: 2rem auto; text-align: center; }
+  .admin-lock-box h3 { font-family: 'Bebas Neue', sans-serif; font-size: 1.6rem; color: var(--green); letter-spacing: 0.05em; margin-bottom: 0.5rem; }
+  .admin-lock-box p { color: var(--text-muted); font-size: 0.88rem; margin-bottom: 1.25rem; }
+  .admin-lock-box input { width: 100%; padding: 11px 14px; border: 1.5px solid var(--border); border-radius: 8px; font-family: 'DM Sans', sans-serif; font-size: 1rem; background: var(--off-white); margin-bottom: 10px; text-align: center; letter-spacing: 0.15em; }
+  .admin-lock-box input:focus { outline: none; border-color: var(--green-mid); }
+  .btn-unlock { width: 100%; padding: 0.85rem; background: var(--green); color: var(--gold); border: none; border-radius: 8px; font-family: 'Bebas Neue', sans-serif; font-size: 1.2rem; letter-spacing: 0.08em; cursor: pointer; }
+  .btn-unlock:hover { background: var(--green-mid); }
+  .admin-row { display: flex; align-items: center; justify-content: space-between; padding: 0.9rem 1.25rem; border-bottom: 1px solid var(--off-white); gap: 1rem; }
+  .admin-row:last-child { border-bottom: none; }
+  .admin-row:hover { background: var(--off-white); }
+  .admin-name { font-weight: 600; font-size: 0.95rem; }
+  .admin-meta { font-size: 0.78rem; color: var(--text-muted); margin-top: 2px; }
+  .btn-delete { background: #fee2e2; color: #b91c1c; border: 1px solid #fca5a5; border-radius: 6px; padding: 6px 16px; font-size: 0.82rem; font-weight: 600; cursor: pointer; white-space: nowrap; transition: background 0.2s; flex-shrink: 0; }
+  .btn-delete:hover { background: #fca5a5; }
+
   .spinner-wrap { display: flex; align-items: center; justify-content: center; gap: 10px; padding: 2rem; color: var(--text-muted); font-size: 0.9rem; }
   .spinner { width: 20px; height: 20px; border: 2px solid var(--border); border-top-color: var(--green-mid); border-radius: 50%; animation: spin 0.7s linear infinite; }
   @keyframes spin { to { transform: rotate(360deg); } }
@@ -105,17 +118,6 @@
   .toast { position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%) translateY(100px); background: var(--green); color: var(--white); padding: 0.8rem 1.5rem; border-radius: 8px; font-weight: 500; font-size: 0.9rem; transition: transform 0.3s ease; z-index: 1000; white-space: nowrap; }
   .toast.show { transform: translateX(-50%) translateY(0); }
   .toast.error { background: #b91c1c; }
-
-
-  .btn-inline { padding: 10px 22px; background: var(--green); color: var(--gold); border: none; border-radius: 8px; font-family: 'Bebas Neue', sans-serif; font-size: 1.1rem; letter-spacing: 0.06em; cursor: pointer; white-space: nowrap; }
-  .btn-inline:hover { background: var(--green-mid); }
-  .btn-delete { background: #fee2e2; color: #b91c1c; border: 1px solid #fca5a5; border-radius: 6px; padding: 5px 14px; font-size: 0.8rem; font-weight: 600; cursor: pointer; transition: background 0.2s; }
-  .btn-delete:hover { background: #fca5a5; }
-  .admin-row { display: flex; align-items: center; justify-content: space-between; padding: 0.85rem 1.25rem; border-bottom: 1px solid var(--off-white); }
-  .admin-row:last-child { border-bottom: none; }
-  .admin-row:hover { background: var(--off-white); }
-  .admin-name { font-weight: 500; font-size: 0.95rem; }
-  .admin-meta { font-size: 0.8rem; color: var(--text-muted); margin-top: 2px; }
 
   @media (max-width: 600px) {
     .team span.name { display: none; }
@@ -143,14 +145,12 @@
 
   <!-- PRONÓSTICOS -->
   <div id="tab-predict" class="section active">
-
-<div class="name-block">
+    <div class="name-block">
       <div>
         <label for="player-name">Tu nombre</label>
         <input type="text" id="player-name" placeholder="Ej. Ana García" autocomplete="off">
       </div>
     </div>
-
     <div class="points-legend">
       <h3>⭐ Sistema de Puntos</h3>
       <div class="legend-grid">
@@ -162,7 +162,6 @@
         <div class="legend-row"><span class="pts-badge pts1">1 pt</span>  Solo los goles de un equipo correctos</div>
       </div>
     </div>
-
     <div id="matches-form"></div>
     <button class="btn-submit" id="btn-guardar" onclick="submitPredictions()">Guardar mis Pronósticos</button>
   </div>
@@ -189,33 +188,34 @@
     <button class="btn-submit" id="btn-resultados" onclick="saveActualScores()">Guardar Resultados</button>
   </div>
 
-
   <!-- ADMIN -->
   <div id="tab-admin" class="section">
-    <div class="actual-header">
-      <h2>🔒 Panel de Administrador</h2>
-      <p>Ingresa la contraseña para gestionar los participantes.</p>
-    </div>
 
+    <!-- LOCKED STATE -->
     <div id="admin-lock">
-      <div class="name-block">
-        <div>
-          <label for="admin-pw">Contraseña</label>
-          <input type="password" id="admin-pw" placeholder="••••••••" onkeydown="if(event.key==='Enter') unlockAdmin()">
-        </div>
-        <button class="btn-inline" onclick="unlockAdmin()">Entrar</button>
+      <div class="admin-lock-box">
+        <h3>🔒 Área de Admin</h3>
+        <p>Ingresa la contraseña para gestionar los participantes</p>
+        <input type="password" id="admin-pw" placeholder="Contraseña" onkeydown="if(event.key==='Enter') unlockAdmin()">
+        <button class="btn-unlock" onclick="unlockAdmin()">Entrar</button>
       </div>
     </div>
 
+    <!-- UNLOCKED STATE -->
     <div id="admin-panel" style="display:none">
+      <div class="actual-header">
+        <h2>👥 Gestionar Participantes</h2>
+        <p>Puedes eliminar a cualquier participante y todos sus pronósticos.</p>
+      </div>
       <div class="leaderboard-table">
-        <div class="lb-header" style="justify-content:space-between">
-          <h2>👥 Participantes</h2>
+        <div class="lb-header">
+          <h2>Participantes</h2>
           <button class="btn-refresh" onclick="loadAdminList()">↻ Actualizar</button>
         </div>
         <div id="admin-list"></div>
       </div>
     </div>
+
   </div>
 
 </main>
@@ -224,130 +224,100 @@
 
 <script>
 // ============================================================
+//  CONFIGURACIÓN
+// ============================================================
+const SCRIPT_URL     = 'https://script.google.com/macros/s/AKfycbxRRke6MKqVcIo6zWEy5EhACfOQlg5Sl-Hr_MmE_FcHTZF_BRNkmZqT2dVHTfprM8AyBw/exec';
+const ADMIN_PASSWORD = 'quiniela2026'; // ← cambia esto por tu contraseña
+
+// ============================================================
 //  PARTIDOS
 // ============================================================
 const MATCHES = [
-  { id:'a1', group:'A', date:'Jue 11 Jun', home:'México',        homeFlag:'🇲🇽', away:'Sudáfrica',    awayFlag:'🇿🇦' },
-  { id:'a2', group:'A', date:'Jue 11 Jun', home:'Corea del Sur', homeFlag:'🇰🇷', away:'Chequia',      awayFlag:'🇨🇿' },
-  { id:'a3', group:'A', date:'Jue 18 Jun', home:'Chequia',       homeFlag:'🇨🇿', away:'Sudáfrica',    awayFlag:'🇿🇦' },
-  { id:'a4', group:'A', date:'Jue 18 Jun', home:'México',        homeFlag:'🇲🇽', away:'Corea del Sur',awayFlag:'🇰🇷' },
-  { id:'a5', group:'A', date:'Mié 24 Jun', home:'Chequia',       homeFlag:'🇨🇿', away:'México',       awayFlag:'🇲🇽' },
-  { id:'a6', group:'A', date:'Mié 24 Jun', home:'Sudáfrica',     homeFlag:'🇿🇦', away:'Corea del Sur',awayFlag:'🇰🇷' },
-  { id:'b1', group:'B', date:'Vie 12 Jun', home:'Canadá',        homeFlag:'🇨🇦', away:'Bosnia y Her.', awayFlag:'🇧🇦' },
-  { id:'b2', group:'B', date:'Sáb 13 Jun', home:'Catar',         homeFlag:'🇶🇦', away:'Suiza',        awayFlag:'🇨🇭' },
-  { id:'b3', group:'B', date:'Jue 18 Jun', home:'Suiza',         homeFlag:'🇨🇭', away:'Bosnia y Her.', awayFlag:'🇧🇦' },
-  { id:'b4', group:'B', date:'Jue 18 Jun', home:'Canadá',        homeFlag:'🇨🇦', away:'Catar',        awayFlag:'🇶🇦' },
-  { id:'b5', group:'B', date:'Mié 24 Jun', home:'Suiza',         homeFlag:'🇨🇭', away:'Canadá',       awayFlag:'🇨🇦' },
-  { id:'b6', group:'B', date:'Mié 24 Jun', home:'Bosnia y Her.', homeFlag:'🇧🇦', away:'Catar',        awayFlag:'🇶🇦' },
-  { id:'c1', group:'C', date:'Sáb 13 Jun', home:'Brasil',        homeFlag:'🇧🇷', away:'Marruecos',    awayFlag:'🇲🇦' },
-  { id:'c2', group:'C', date:'Sáb 13 Jun', home:'Haití',         homeFlag:'🇭🇹', away:'Escocia',      awayFlag:'🏴󠁧󠁢󠁳󠁣󠁴󠁿' },
-  { id:'c3', group:'C', date:'Vie 19 Jun', home:'Escocia',       homeFlag:'🏴󠁧󠁢󠁳󠁣󠁴󠁿', away:'Marruecos',  awayFlag:'🇲🇦' },
-  { id:'c4', group:'C', date:'Vie 19 Jun', home:'Brasil',        homeFlag:'🇧🇷', away:'Haití',        awayFlag:'🇭🇹' },
-  { id:'c5', group:'C', date:'Mié 24 Jun', home:'Escocia',       homeFlag:'🏴󠁧󠁢󠁳󠁣󠁴󠁿', away:'Brasil',     awayFlag:'🇧🇷' },
-  { id:'c6', group:'C', date:'Mié 24 Jun', home:'Marruecos',     homeFlag:'🇲🇦', away:'Haití',        awayFlag:'🇭🇹' },
-  { id:'d1', group:'D', date:'Vie 12 Jun', home:'Estados Unidos',homeFlag:'🇺🇸', away:'Paraguay',     awayFlag:'🇵🇾' },
-  { id:'d2', group:'D', date:'Sáb 13 Jun', home:'Australia',     homeFlag:'🇦🇺', away:'Turquía',      awayFlag:'🇹🇷' },
-  { id:'d3', group:'D', date:'Vie 19 Jun', home:'Estados Unidos',homeFlag:'🇺🇸', away:'Australia',    awayFlag:'🇦🇺' },
-  { id:'d4', group:'D', date:'Vie 19 Jun', home:'Turquía',       homeFlag:'🇹🇷', away:'Paraguay',     awayFlag:'🇵🇾' },
-  { id:'d5', group:'D', date:'Jue 25 Jun', home:'Turquía',       homeFlag:'🇹🇷', away:'Estados Unidos',awayFlag:'🇺🇸' },
-  { id:'d6', group:'D', date:'Jue 25 Jun', home:'Paraguay',      homeFlag:'🇵🇾', away:'Australia',    awayFlag:'🇦🇺' },
-  { id:'e1', group:'E', date:'Dom 14 Jun', home:'Alemania',      homeFlag:'🇩🇪', away:'Curazao',      awayFlag:'🇨🇼' },
-  { id:'e2', group:'E', date:'Dom 14 Jun', home:'Costa de Marfil',homeFlag:'🇨🇮', away:'Ecuador',     awayFlag:'🇪🇨' },
-  { id:'e3', group:'E', date:'Sáb 20 Jun', home:'Alemania',      homeFlag:'🇩🇪', away:'Costa de Marfil',awayFlag:'🇨🇮' },
-  { id:'e4', group:'E', date:'Sáb 20 Jun', home:'Ecuador',       homeFlag:'🇪🇨', away:'Curazao',      awayFlag:'🇨🇼' },
-  { id:'e5', group:'E', date:'Jue 25 Jun', home:'Curazao',       homeFlag:'🇨🇼', away:'Costa de Marfil',awayFlag:'🇨🇮' },
-  { id:'e6', group:'E', date:'Jue 25 Jun', home:'Ecuador',       homeFlag:'🇪🇨', away:'Alemania',     awayFlag:'🇩🇪' },
-  { id:'f1', group:'F', date:'Dom 14 Jun', home:'Países Bajos',  homeFlag:'🇳🇱', away:'Japón',        awayFlag:'🇯🇵' },
-  { id:'f2', group:'F', date:'Dom 14 Jun', home:'Suecia',        homeFlag:'🇸🇪', away:'Túnez',        awayFlag:'🇹🇳' },
-  { id:'f3', group:'F', date:'Sáb 20 Jun', home:'Países Bajos',  homeFlag:'🇳🇱', away:'Suecia',       awayFlag:'🇸🇪' },
-  { id:'f4', group:'F', date:'Sáb 20 Jun', home:'Túnez',         homeFlag:'🇹🇳', away:'Japón',        awayFlag:'🇯🇵' },
-  { id:'f5', group:'F', date:'Jue 25 Jun', home:'Japón',         homeFlag:'🇯🇵', away:'Suecia',       awayFlag:'🇸🇪' },
-  { id:'f6', group:'F', date:'Jue 25 Jun', home:'Túnez',         homeFlag:'🇹🇳', away:'Países Bajos', awayFlag:'🇳🇱' },
-  { id:'g1', group:'G', date:'Lun 15 Jun', home:'Bélgica',       homeFlag:'🇧🇪', away:'Egipto',       awayFlag:'🇪🇬' },
-  { id:'g2', group:'G', date:'Lun 15 Jun', home:'Irán',          homeFlag:'🇮🇷', away:'Nueva Zelanda',awayFlag:'🇳🇿' },
-  { id:'g3', group:'G', date:'Dom 21 Jun', home:'Bélgica',       homeFlag:'🇧🇪', away:'Irán',         awayFlag:'🇮🇷' },
-  { id:'g4', group:'G', date:'Dom 21 Jun', home:'Nueva Zelanda', homeFlag:'🇳🇿', away:'Egipto',       awayFlag:'🇪🇬' },
-  { id:'g5', group:'G', date:'Vie 26 Jun', home:'Egipto',        homeFlag:'🇪🇬', away:'Irán',         awayFlag:'🇮🇷' },
-  { id:'g6', group:'G', date:'Vie 26 Jun', home:'Nueva Zelanda', homeFlag:'🇳🇿', away:'Bélgica',      awayFlag:'🇧🇪' },
-  { id:'h1', group:'H', date:'Lun 15 Jun', home:'España',        homeFlag:'🇪🇸', away:'Cabo Verde',   awayFlag:'🇨🇻' },
-  { id:'h2', group:'H', date:'Lun 15 Jun', home:'Arabia Saudita',homeFlag:'🇸🇦', away:'Uruguay',      awayFlag:'🇺🇾' },
-  { id:'h3', group:'H', date:'Dom 21 Jun', home:'España',        homeFlag:'🇪🇸', away:'Arabia Saudita',awayFlag:'🇸🇦' },
-  { id:'h4', group:'H', date:'Dom 21 Jun', home:'Uruguay',       homeFlag:'🇺🇾', away:'Cabo Verde',   awayFlag:'🇨🇻' },
-  { id:'h5', group:'H', date:'Vie 26 Jun', home:'Cabo Verde',    homeFlag:'🇨🇻', away:'Arabia Saudita',awayFlag:'🇸🇦' },
-  { id:'h6', group:'H', date:'Vie 26 Jun', home:'Uruguay',       homeFlag:'🇺🇾', away:'España',       awayFlag:'🇪🇸' },
-  { id:'i1', group:'I', date:'Mar 16 Jun', home:'Francia',       homeFlag:'🇫🇷', away:'Senegal',      awayFlag:'🇸🇳' },
-  { id:'i2', group:'I', date:'Mar 16 Jun', home:'Irak',          homeFlag:'🇮🇶', away:'Noruega',      awayFlag:'🇳🇴' },
-  { id:'i3', group:'I', date:'Lun 22 Jun', home:'Francia',       homeFlag:'🇫🇷', away:'Irak',         awayFlag:'🇮🇶' },
-  { id:'i4', group:'I', date:'Lun 22 Jun', home:'Noruega',       homeFlag:'🇳🇴', away:'Senegal',      awayFlag:'🇸🇳' },
-  { id:'i5', group:'I', date:'Vie 26 Jun', home:'Noruega',       homeFlag:'🇳🇴', away:'Francia',      awayFlag:'🇫🇷' },
-  { id:'i6', group:'I', date:'Vie 26 Jun', home:'Senegal',       homeFlag:'🇸🇳', away:'Irak',         awayFlag:'🇮🇶' },
-  { id:'j1', group:'J', date:'Mar 16 Jun', home:'Argentina',     homeFlag:'🇦🇷', away:'Argelia',      awayFlag:'🇩🇿' },
-  { id:'j2', group:'J', date:'Mar 16 Jun', home:'Austria',       homeFlag:'🇦🇹', away:'Jordania',     awayFlag:'🇯🇴' },
-  { id:'j3', group:'J', date:'Lun 22 Jun', home:'Argentina',     homeFlag:'🇦🇷', away:'Austria',      awayFlag:'🇦🇹' },
-  { id:'j4', group:'J', date:'Lun 22 Jun', home:'Jordania',      homeFlag:'🇯🇴', away:'Argelia',      awayFlag:'🇩🇿' },
-  { id:'j5', group:'J', date:'Sáb 27 Jun', home:'Jordania',      homeFlag:'🇯🇴', away:'Argentina',    awayFlag:'🇦🇷' },
-  { id:'j6', group:'J', date:'Sáb 27 Jun', home:'Argelia',       homeFlag:'🇩🇿', away:'Austria',      awayFlag:'🇦🇹' },
-  { id:'k1', group:'K', date:'Vie 17 Jun', home:'Portugal',      homeFlag:'🇵🇹', away:'Congo RD',     awayFlag:'🇨🇩' },
-  { id:'k2', group:'K', date:'Vie 17 Jun', home:'Uzbekistán',    homeFlag:'🇺🇿', away:'Colombia',     awayFlag:'🇨🇴' },
-  { id:'k3', group:'K', date:'Mar 23 Jun', home:'Portugal',      homeFlag:'🇵🇹', away:'Uzbekistán',   awayFlag:'🇺🇿' },
-  { id:'k4', group:'K', date:'Mar 23 Jun', home:'Colombia',      homeFlag:'🇨🇴', away:'Congo RD',     awayFlag:'🇨🇩' },
-  { id:'k5', group:'K', date:'Sáb 27 Jun', home:'Colombia',      homeFlag:'🇨🇴', away:'Portugal',     awayFlag:'🇵🇹' },
-  { id:'k6', group:'K', date:'Sáb 27 Jun', home:'Congo RD',      homeFlag:'🇨🇩', away:'Uzbekistán',   awayFlag:'🇺🇿' },
-  { id:'l1', group:'L', date:'Vie 17 Jun', home:'Inglaterra',    homeFlag:'🏴󠁧󠁢󠁥󠁮󠁧󠁿', away:'Croacia',   awayFlag:'🇭🇷' },
-  { id:'l2', group:'L', date:'Vie 17 Jun', home:'Ghana',         homeFlag:'🇬🇭', away:'Panamá',       awayFlag:'🇵🇦' },
-  { id:'l3', group:'L', date:'Mar 23 Jun', home:'Inglaterra',    homeFlag:'🏴󠁧󠁢󠁥󠁮󠁧󠁿', away:'Ghana',     awayFlag:'🇬🇭' },
-  { id:'l4', group:'L', date:'Mar 23 Jun', home:'Panamá',        homeFlag:'🇵🇦', away:'Croacia',      awayFlag:'🇭🇷' },
-  { id:'l5', group:'L', date:'Sáb 27 Jun', home:'Panamá',        homeFlag:'🇵🇦', away:'Inglaterra',   awayFlag:'🏴󠁧󠁢󠁥󠁮󠁧󠁿' },
-  { id:'l6', group:'L', date:'Sáb 27 Jun', home:'Croacia',       homeFlag:'🇭🇷', away:'Ghana',        awayFlag:'🇬🇭' },
+  { id:'a1', group:'A', date:'Jue 11 Jun', home:'México',         homeFlag:'🇲🇽', away:'Sudáfrica',     awayFlag:'🇿🇦' },
+  { id:'a2', group:'A', date:'Jue 11 Jun', home:'Corea del Sur',  homeFlag:'🇰🇷', away:'Chequia',       awayFlag:'🇨🇿' },
+  { id:'a3', group:'A', date:'Jue 18 Jun', home:'Chequia',        homeFlag:'🇨🇿', away:'Sudáfrica',     awayFlag:'🇿🇦' },
+  { id:'a4', group:'A', date:'Jue 18 Jun', home:'México',         homeFlag:'🇲🇽', away:'Corea del Sur', awayFlag:'🇰🇷' },
+  { id:'a5', group:'A', date:'Mié 24 Jun', home:'Chequia',        homeFlag:'🇨🇿', away:'México',        awayFlag:'🇲🇽' },
+  { id:'a6', group:'A', date:'Mié 24 Jun', home:'Sudáfrica',      homeFlag:'🇿🇦', away:'Corea del Sur', awayFlag:'🇰🇷' },
+  { id:'b1', group:'B', date:'Vie 12 Jun', home:'Canadá',         homeFlag:'🇨🇦', away:'Bosnia y Her.', awayFlag:'🇧🇦' },
+  { id:'b2', group:'B', date:'Sáb 13 Jun', home:'Catar',          homeFlag:'🇶🇦', away:'Suiza',         awayFlag:'🇨🇭' },
+  { id:'b3', group:'B', date:'Jue 18 Jun', home:'Suiza',          homeFlag:'🇨🇭', away:'Bosnia y Her.', awayFlag:'🇧🇦' },
+  { id:'b4', group:'B', date:'Jue 18 Jun', home:'Canadá',         homeFlag:'🇨🇦', away:'Catar',         awayFlag:'🇶🇦' },
+  { id:'b5', group:'B', date:'Mié 24 Jun', home:'Suiza',          homeFlag:'🇨🇭', away:'Canadá',        awayFlag:'🇨🇦' },
+  { id:'b6', group:'B', date:'Mié 24 Jun', home:'Bosnia y Her.',  homeFlag:'🇧🇦', away:'Catar',         awayFlag:'🇶🇦' },
+  { id:'c1', group:'C', date:'Sáb 13 Jun', home:'Brasil',         homeFlag:'🇧🇷', away:'Marruecos',     awayFlag:'🇲🇦' },
+  { id:'c2', group:'C', date:'Sáb 13 Jun', home:'Haití',          homeFlag:'🇭🇹', away:'Escocia',       awayFlag:'🏴󠁧󠁢󠁳󠁣󠁴󠁿' },
+  { id:'c3', group:'C', date:'Vie 19 Jun', home:'Escocia',        homeFlag:'🏴󠁧󠁢󠁳󠁣󠁴󠁿', away:'Marruecos',   awayFlag:'🇲🇦' },
+  { id:'c4', group:'C', date:'Vie 19 Jun', home:'Brasil',         homeFlag:'🇧🇷', away:'Haití',         awayFlag:'🇭🇹' },
+  { id:'c5', group:'C', date:'Mié 24 Jun', home:'Escocia',        homeFlag:'🏴󠁧󠁢󠁳󠁣󠁴󠁿', away:'Brasil',      awayFlag:'🇧🇷' },
+  { id:'c6', group:'C', date:'Mié 24 Jun', home:'Marruecos',      homeFlag:'🇲🇦', away:'Haití',         awayFlag:'🇭🇹' },
+  { id:'d1', group:'D', date:'Vie 12 Jun', home:'Estados Unidos', homeFlag:'🇺🇸', away:'Paraguay',      awayFlag:'🇵🇾' },
+  { id:'d2', group:'D', date:'Sáb 13 Jun', home:'Australia',      homeFlag:'🇦🇺', away:'Turquía',       awayFlag:'🇹🇷' },
+  { id:'d3', group:'D', date:'Vie 19 Jun', home:'Estados Unidos', homeFlag:'🇺🇸', away:'Australia',     awayFlag:'🇦🇺' },
+  { id:'d4', group:'D', date:'Vie 19 Jun', home:'Turquía',        homeFlag:'🇹🇷', away:'Paraguay',      awayFlag:'🇵🇾' },
+  { id:'d5', group:'D', date:'Jue 25 Jun', home:'Turquía',        homeFlag:'🇹🇷', away:'Estados Unidos',awayFlag:'🇺🇸' },
+  { id:'d6', group:'D', date:'Jue 25 Jun', home:'Paraguay',       homeFlag:'🇵🇾', away:'Australia',     awayFlag:'🇦🇺' },
+  { id:'e1', group:'E', date:'Dom 14 Jun', home:'Alemania',       homeFlag:'🇩🇪', away:'Curazao',       awayFlag:'🇨🇼' },
+  { id:'e2', group:'E', date:'Dom 14 Jun', home:'Costa de Marfil',homeFlag:'🇨🇮', away:'Ecuador',       awayFlag:'🇪🇨' },
+  { id:'e3', group:'E', date:'Sáb 20 Jun', home:'Alemania',       homeFlag:'🇩🇪', away:'Costa de Marfil',awayFlag:'🇨🇮' },
+  { id:'e4', group:'E', date:'Sáb 20 Jun', home:'Ecuador',        homeFlag:'🇪🇨', away:'Curazao',       awayFlag:'🇨🇼' },
+  { id:'e5', group:'E', date:'Jue 25 Jun', home:'Curazao',        homeFlag:'🇨🇼', away:'Costa de Marfil',awayFlag:'🇨🇮' },
+  { id:'e6', group:'E', date:'Jue 25 Jun', home:'Ecuador',        homeFlag:'🇪🇨', away:'Alemania',      awayFlag:'🇩🇪' },
+  { id:'f1', group:'F', date:'Dom 14 Jun', home:'Países Bajos',   homeFlag:'🇳🇱', away:'Japón',         awayFlag:'🇯🇵' },
+  { id:'f2', group:'F', date:'Dom 14 Jun', home:'Suecia',         homeFlag:'🇸🇪', away:'Túnez',         awayFlag:'🇹🇳' },
+  { id:'f3', group:'F', date:'Sáb 20 Jun', home:'Países Bajos',   homeFlag:'🇳🇱', away:'Suecia',        awayFlag:'🇸🇪' },
+  { id:'f4', group:'F', date:'Sáb 20 Jun', home:'Túnez',          homeFlag:'🇹🇳', away:'Japón',         awayFlag:'🇯🇵' },
+  { id:'f5', group:'F', date:'Jue 25 Jun', home:'Japón',          homeFlag:'🇯🇵', away:'Suecia',        awayFlag:'🇸🇪' },
+  { id:'f6', group:'F', date:'Jue 25 Jun', home:'Túnez',          homeFlag:'🇹🇳', away:'Países Bajos',  awayFlag:'🇳🇱' },
+  { id:'g1', group:'G', date:'Lun 15 Jun', home:'Bélgica',        homeFlag:'🇧🇪', away:'Egipto',        awayFlag:'🇪🇬' },
+  { id:'g2', group:'G', date:'Lun 15 Jun', home:'Irán',           homeFlag:'🇮🇷', away:'Nueva Zelanda', awayFlag:'🇳🇿' },
+  { id:'g3', group:'G', date:'Dom 21 Jun', home:'Bélgica',        homeFlag:'🇧🇪', away:'Irán',          awayFlag:'🇮🇷' },
+  { id:'g4', group:'G', date:'Dom 21 Jun', home:'Nueva Zelanda',  homeFlag:'🇳🇿', away:'Egipto',        awayFlag:'🇪🇬' },
+  { id:'g5', group:'G', date:'Vie 26 Jun', home:'Egipto',         homeFlag:'🇪🇬', away:'Irán',          awayFlag:'🇮🇷' },
+  { id:'g6', group:'G', date:'Vie 26 Jun', home:'Nueva Zelanda',  homeFlag:'🇳🇿', away:'Bélgica',       awayFlag:'🇧🇪' },
+  { id:'h1', group:'H', date:'Lun 15 Jun', home:'España',         homeFlag:'🇪🇸', away:'Cabo Verde',    awayFlag:'🇨🇻' },
+  { id:'h2', group:'H', date:'Lun 15 Jun', home:'Arabia Saudita', homeFlag:'🇸🇦', away:'Uruguay',       awayFlag:'🇺🇾' },
+  { id:'h3', group:'H', date:'Dom 21 Jun', home:'España',         homeFlag:'🇪🇸', away:'Arabia Saudita',awayFlag:'🇸🇦' },
+  { id:'h4', group:'H', date:'Dom 21 Jun', home:'Uruguay',        homeFlag:'🇺🇾', away:'Cabo Verde',    awayFlag:'🇨🇻' },
+  { id:'h5', group:'H', date:'Vie 26 Jun', home:'Cabo Verde',     homeFlag:'🇨🇻', away:'Arabia Saudita',awayFlag:'🇸🇦' },
+  { id:'h6', group:'H', date:'Vie 26 Jun', home:'Uruguay',        homeFlag:'🇺🇾', away:'España',        awayFlag:'🇪🇸' },
+  { id:'i1', group:'I', date:'Mar 16 Jun', home:'Francia',        homeFlag:'🇫🇷', away:'Senegal',       awayFlag:'🇸🇳' },
+  { id:'i2', group:'I', date:'Mar 16 Jun', home:'Irak',           homeFlag:'🇮🇶', away:'Noruega',       awayFlag:'🇳🇴' },
+  { id:'i3', group:'I', date:'Lun 22 Jun', home:'Francia',        homeFlag:'🇫🇷', away:'Irak',          awayFlag:'🇮🇶' },
+  { id:'i4', group:'I', date:'Lun 22 Jun', home:'Noruega',        homeFlag:'🇳🇴', away:'Senegal',       awayFlag:'🇸🇳' },
+  { id:'i5', group:'I', date:'Vie 26 Jun', home:'Noruega',        homeFlag:'🇳🇴', away:'Francia',       awayFlag:'🇫🇷' },
+  { id:'i6', group:'I', date:'Vie 26 Jun', home:'Senegal',        homeFlag:'🇸🇳', away:'Irak',          awayFlag:'🇮🇶' },
+  { id:'j1', group:'J', date:'Mar 16 Jun', home:'Argentina',      homeFlag:'🇦🇷', away:'Argelia',       awayFlag:'🇩🇿' },
+  { id:'j2', group:'J', date:'Mar 16 Jun', home:'Austria',        homeFlag:'🇦🇹', away:'Jordania',      awayFlag:'🇯🇴' },
+  { id:'j3', group:'J', date:'Lun 22 Jun', home:'Argentina',      homeFlag:'🇦🇷', away:'Austria',       awayFlag:'🇦🇹' },
+  { id:'j4', group:'J', date:'Lun 22 Jun', home:'Jordania',       homeFlag:'🇯🇴', away:'Argelia',       awayFlag:'🇩🇿' },
+  { id:'j5', group:'J', date:'Sáb 27 Jun', home:'Jordania',       homeFlag:'🇯🇴', away:'Argentina',     awayFlag:'🇦🇷' },
+  { id:'j6', group:'J', date:'Sáb 27 Jun', home:'Argelia',        homeFlag:'🇩🇿', away:'Austria',       awayFlag:'🇦🇹' },
+  { id:'k1', group:'K', date:'Vie 17 Jun', home:'Portugal',       homeFlag:'🇵🇹', away:'Congo RD',      awayFlag:'🇨🇩' },
+  { id:'k2', group:'K', date:'Vie 17 Jun', home:'Uzbekistán',     homeFlag:'🇺🇿', away:'Colombia',      awayFlag:'🇨🇴' },
+  { id:'k3', group:'K', date:'Mar 23 Jun', home:'Portugal',       homeFlag:'🇵🇹', away:'Uzbekistán',    awayFlag:'🇺🇿' },
+  { id:'k4', group:'K', date:'Mar 23 Jun', home:'Colombia',       homeFlag:'🇨🇴', away:'Congo RD',      awayFlag:'🇨🇩' },
+  { id:'k5', group:'K', date:'Sáb 27 Jun', home:'Colombia',       homeFlag:'🇨🇴', away:'Portugal',      awayFlag:'🇵🇹' },
+  { id:'k6', group:'K', date:'Sáb 27 Jun', home:'Congo RD',       homeFlag:'🇨🇩', away:'Uzbekistán',    awayFlag:'🇺🇿' },
+  { id:'l1', group:'L', date:'Vie 17 Jun', home:'Inglaterra',     homeFlag:'🏴󠁧󠁢󠁥󠁮󠁧󠁿', away:'Croacia',    awayFlag:'🇭🇷' },
+  { id:'l2', group:'L', date:'Vie 17 Jun', home:'Ghana',          homeFlag:'🇬🇭', away:'Panamá',        awayFlag:'🇵🇦' },
+  { id:'l3', group:'L', date:'Mar 23 Jun', home:'Inglaterra',     homeFlag:'🏴󠁧󠁢󠁥󠁮󠁧󠁿', away:'Ghana',      awayFlag:'🇬🇭' },
+  { id:'l4', group:'L', date:'Mar 23 Jun', home:'Panamá',         homeFlag:'🇵🇦', away:'Croacia',       awayFlag:'🇭🇷' },
+  { id:'l5', group:'L', date:'Sáb 27 Jun', home:'Panamá',         homeFlag:'🇵🇦', away:'Inglaterra',    awayFlag:'🏴󠁧󠁢󠁥󠁮󠁧󠁿' },
+  { id:'l6', group:'L', date:'Sáb 27 Jun', home:'Croacia',        homeFlag:'🇭🇷', away:'Ghana',         awayFlag:'🇬🇭' },
 ];
 
 // ============================================================
-//  CONFIGURACIÓN — URL del Web App
-// ============================================================
-let SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxRRke6MKqVcIo6zWEy5EhACfOQlg5Sl-Hr_MmE_FcHTZF_BRNkmZqT2dVHTfprM8AyBw/exec';
-
-function saveScriptUrl() {
-  const val = document.getElementById('script-url-input').value.trim();
-  if (!val.startsWith('https://script.google.com')) {
-    setUrlStatus('URL inválida. Debe empezar con https://script.google.com', false);
-    return;
-  }
-  SCRIPT_URL = val;
-  localStorage.setItem('q2026_script_url', val);
-  setUrlStatus('✅ URL guardada correctamente', true);
-  document.getElementById('setup-banner').style.borderColor = '#1a6e3a';
-}
-
-function setUrlStatus(msg, ok) {
-  const el = document.getElementById('url-status');
-  el.textContent = msg;
-  el.className = 'url-status ' + (ok ? 'ok' : 'err');
-}
-
-function checkUrlOnLoad() {
-  if (SCRIPT_URL) {
-    document.getElementById('script-url-input').value = SCRIPT_URL;
-    setUrlStatus('✅ URL configurada', true);
-    document.getElementById('setup-banner').style.borderColor = '#1a6e3a';
-  }
-}
-
-// ============================================================
-//  API CALLS AL SCRIPT
+//  API
 // ============================================================
 async function apiGet(params) {
-  if (!SCRIPT_URL) { showToast('⚠ Primero configura la URL del script', true); return null; }
   const url = SCRIPT_URL + '?' + new URLSearchParams(params);
   const res = await fetch(url);
   return res.json();
 }
 
 async function apiPost(body) {
-  if (!SCRIPT_URL) { showToast('⚠ Primero configura la URL del script', true); return null; }
-  const res = await fetch(SCRIPT_URL, {
-    method: 'POST',
-    body: JSON.stringify(body)
-  });
+  const res = await fetch(SCRIPT_URL, { method: 'POST', body: JSON.stringify(body) });
   return res.json();
 }
 
@@ -389,12 +359,12 @@ function showToast(msg, isError) {
   setTimeout(() => t.className = 'toast', 3000);
 }
 
-function spinner(containerId) {
-  document.getElementById(containerId).innerHTML = '<div class="spinner-wrap"><div class="spinner"></div> Cargando...</div>';
+function spinner(id) {
+  document.getElementById(id).innerHTML = '<div class="spinner-wrap"><div class="spinner"></div> Cargando...</div>';
 }
 
 // ============================================================
-//  FORMULARIO DE PRONÓSTICOS
+//  PRONÓSTICOS
 // ============================================================
 function buildPredictForm() {
   const groups = [...new Set(MATCHES.map(m => m.group))];
@@ -405,19 +375,13 @@ function buildPredictForm() {
       html += `
       <div class="match-card" id="card-${m.id}">
         <span class="match-date">${m.date}</span>
-        <div class="team home" style="padding-top:14px">
-          <span class="flag">${m.homeFlag}</span>
-          <span class="name">${m.home}</span>
-        </div>
-        <div class="score-inputs" style="padding-top:14px">
+        <div class="team home"><span class="flag">${m.homeFlag}</span><span class="name">${m.home}</span></div>
+        <div class="score-inputs">
           <input type="number" min="0" max="20" value="" placeholder="0" id="h-${m.id}" oninput="markCard('${m.id}')">
           <span class="vs">VS</span>
           <input type="number" min="0" max="20" value="" placeholder="0" id="a-${m.id}" oninput="markCard('${m.id}')">
         </div>
-        <div class="team away" style="padding-top:14px">
-          <span class="flag">${m.awayFlag}</span>
-          <span class="name">${m.away}</span>
-        </div>
+        <div class="team away"><span class="flag">${m.awayFlag}</span><span class="name">${m.away}</span></div>
       </div>`;
     });
   });
@@ -434,29 +398,18 @@ function markCard(id) {
 async function submitPredictions() {
   const name = document.getElementById('player-name').value.trim();
   if (!name) { showToast('⚠ Por favor ingresa tu nombre primero', true); return; }
-
   const predictions = {};
   let filled = 0;
   MATCHES.forEach(m => {
     const h = document.getElementById('h-' + m.id).value;
     const a = document.getElementById('a-' + m.id).value;
-    if (h !== '' && a !== '') {
-      predictions[m.id] = { home: parseInt(h), away: parseInt(a) };
-      filled++;
-    }
+    if (h !== '' && a !== '') { predictions[m.id] = { home: parseInt(h), away: parseInt(a) }; filled++; }
   });
-
   if (filled === 0) { showToast('⚠ Pronostica al menos un partido', true); return; }
-
   const btn = document.getElementById('btn-guardar');
-  btn.disabled = true;
-  btn.textContent = 'Guardando...';
-
+  btn.disabled = true; btn.textContent = 'Guardando...';
   const res = await apiPost({ action: 'savePrediction', name, predictions });
-
-  btn.disabled = false;
-  btn.textContent = 'Guardar mis Pronósticos';
-
+  btn.disabled = false; btn.textContent = 'Guardar mis Pronósticos';
   if (res && res.ok) {
     showToast(`✅ ${filled} pronósticos guardados para ${name}`);
     document.getElementById('player-name').value = '';
@@ -467,7 +420,7 @@ async function submitPredictions() {
       card.style.borderColor = ''; card.style.background = '';
     });
   } else {
-    showToast('❌ Error al guardar. Verifica la URL del script.', true);
+    showToast('❌ Error al guardar. Verifica la conexión.', true);
   }
 }
 
@@ -475,27 +428,20 @@ async function submitPredictions() {
 //  TABLA DE POSICIONES
 // ============================================================
 async function renderLeaderboard() {
-  spinner('stats-cards');
-  spinner('leaderboard-body');
-
+  spinner('stats-cards'); spinner('leaderboard-body');
   const data = await apiGet({ action: 'getLeaderboard' });
   if (!data) return;
-
   const { leaderboard, totalActual } = data;
   const topPts = leaderboard.length > 0 ? leaderboard[0].totalPts : 0;
-
   document.getElementById('stats-cards').innerHTML = `
     <div class="stat-card"><div class="num">${leaderboard.length}</div><div class="lbl">Participantes</div></div>
     <div class="stat-card"><div class="num">${totalActual}</div><div class="lbl">Partidos jugados</div></div>
     <div class="stat-card"><div class="num">${MATCHES.length - totalActual}</div><div class="lbl">Partidos restantes</div></div>
-    <div class="stat-card"><div class="num">${topPts}</div><div class="lbl">Puntaje más alto</div></div>
-  `;
-
+    <div class="stat-card"><div class="num">${topPts}</div><div class="lbl">Puntaje más alto</div></div>`;
   if (leaderboard.length === 0) {
-    document.getElementById('leaderboard-body').innerHTML = '<div class="no-entries">Aún no hay pronósticos — ¡sé el primero en participar!</div>';
+    document.getElementById('leaderboard-body').innerHTML = '<div class="no-entries">Aún no hay pronósticos — ¡sé el primero!</div>';
     return;
   }
-
   const ranks = ['gold','silver','bronze'];
   let rows = '';
   leaderboard.forEach((p, i) => {
@@ -508,15 +454,9 @@ async function renderLeaderboard() {
       <td class="num" style="color:var(--green-mid);font-size:1.05rem">${p.totalPts}</td>
     </tr>`;
   });
-
   document.getElementById('leaderboard-body').innerHTML = `
     <table>
-      <thead><tr>
-        <th>#</th><th>Jugador</th>
-        <th class="num">Pronosticados</th>
-        <th class="num">Evaluados</th>
-        <th class="num">Puntos</th>
-      </tr></thead>
+      <thead><tr><th>#</th><th>Jugador</th><th class="num">Pronosticados</th><th class="num">Evaluados</th><th class="num">Puntos</th></tr></thead>
       <tbody>${rows}</tbody>
     </table>`;
 }
@@ -540,20 +480,13 @@ function renderActualForm(actual) {
       const played = a !== undefined;
       html += `<div class="actual-match">
         <span class="match-date">${m.date}</span>
-        <div class="team home" style="padding-top:14px">
-          <span class="flag">${m.homeFlag}</span>
-          <span class="name">${m.home}</span>
-          ${played ? '<span class="played-badge">Jugado</span>' : ''}
-        </div>
-        <div class="score-inputs" style="padding-top:14px">
+        <div class="team home"><span class="flag">${m.homeFlag}</span><span class="name">${m.home}</span>${played ? '<span class="played-badge">Jugado</span>' : ''}</div>
+        <div class="score-inputs">
           <input type="number" min="0" max="20" value="${played ? a.home : ''}" placeholder="—" id="ah-${m.id}">
           <span class="vs">:</span>
           <input type="number" min="0" max="20" value="${played ? a.away : ''}" placeholder="—" id="aa-${m.id}">
         </div>
-        <div class="team away" style="padding-top:14px">
-          <span class="flag">${m.awayFlag}</span>
-          <span class="name">${m.away}</span>
-        </div>
+        <div class="team away"><span class="flag">${m.awayFlag}</span><span class="name">${m.away}</span></div>
       </div>`;
     });
   });
@@ -567,29 +500,17 @@ async function saveActualScores() {
     const a = document.getElementById('aa-' + m.id).value;
     if (h !== '' && a !== '') scores[m.id] = { home: parseInt(h), away: parseInt(a) };
   });
-
   const btn = document.getElementById('btn-resultados');
-  btn.disabled = true;
-  btn.textContent = 'Guardando...';
-
+  btn.disabled = true; btn.textContent = 'Guardando...';
   const res = await apiPost({ action: 'saveActual', scores });
-
-  btn.disabled = false;
-  btn.textContent = 'Guardar Resultados';
-
-  if (res && res.ok) {
-    showToast(`✅ ${res.saved} resultados guardados para todos`);
-  } else {
-    showToast('❌ Error al guardar. Verifica la URL del script.', true);
-  }
+  btn.disabled = false; btn.textContent = 'Guardar Resultados';
+  if (res && res.ok) showToast(`✅ ${res.saved} resultados guardados para todos`);
+  else showToast('❌ Error al guardar.', true);
 }
-
 
 // ============================================================
 //  ADMIN
 // ============================================================
-const ADMIN_PASSWORD = "quiniela2026"; // ← cambia esto por tu contraseña
-
 function unlockAdmin() {
   const pw = document.getElementById('admin-pw').value;
   if (pw === ADMIN_PASSWORD) {
@@ -603,7 +524,7 @@ function unlockAdmin() {
 }
 
 async function loadAdminList() {
-  document.getElementById('admin-list').innerHTML = '<div class="spinner-wrap"><div class="spinner"></div> Cargando...</div>';
+  spinner('admin-list');
   const data = await apiGet({ action: 'getLeaderboard' });
   if (!data || !data.leaderboard) {
     document.getElementById('admin-list').innerHTML = '<div class="no-entries">No se pudo cargar la lista.</div>';
@@ -615,22 +536,23 @@ async function loadAdminList() {
   }
   let html = '';
   data.leaderboard.forEach(p => {
+    const safeName = p.name.replace(/"/g, '&quot;');
     html += `<div class="admin-row">
       <div>
         <div class="admin-name">${p.name}</div>
         <div class="admin-meta">${p.predicted} pronósticos &bull; ${p.totalPts} puntos</div>
       </div>
-      <button class="btn-delete" onclick="deleteParticipant('${p.name.replace(/'/g, "\'")}')">🗑 Eliminar</button>
+      <button class="btn-delete" onclick="deleteParticipant(&quot;${safeName}&quot;)">🗑 Eliminar</button>
     </div>`;
   });
   document.getElementById('admin-list').innerHTML = html;
 }
 
 async function deleteParticipant(name) {
-  if (!confirm(\`¿Seguro que quieres eliminar a "\${name}"? Esto borrará todos sus pronósticos.\`)) return;
+  if (!confirm('¿Seguro que quieres eliminar a "' + name + '"? Esto borrará todos sus pronósticos.')) return;
   const res = await apiPost({ action: 'deleteParticipant', name });
   if (res && res.ok) {
-    showToast(\`✅ "\${name}" eliminado correctamente\`);
+    showToast('✅ "' + name + '" eliminado correctamente');
     loadAdminList();
   } else {
     showToast('❌ Error al eliminar. Intenta de nuevo.', true);
