@@ -204,7 +204,8 @@
     </div>
 
     <div id="matches-form"></div>
-    <button class="btn-submit" id="btn-guardar" onclick="submitPredictions()">Guardar mis Pronósticos</button>
+    <div id="pred-counter" style="text-align:center;margin-top:1rem;font-size:0.9rem;color:var(--text-muted)">0 / 72 partidos pronosticados</div>
+    <button class="btn-submit" id="btn-guardar" onclick="submitPredictions()" style="margin-top:0.75rem">Guardar mis Pronósticos</button>
   </div>
 
   <!-- TABLA DE POSICIONES -->
@@ -284,7 +285,7 @@
 // ============================================================
 //  CONFIGURACIÓN
 // ============================================================
-const SCRIPT_URL     = 'https://script.google.com/macros/s/AKfycbyoeVFVAbayX5Zzj8EDjug1PVU7jtXSvwurC0nqSKY3R5isS5guWqND6a-t90gLMi1e9Q/exec';
+const SCRIPT_URL     = 'https://script.google.com/macros/s/AKfycbxRRke6MKqVcIo6zWEy5EhACfOQlg5Sl-Hr_MmE_FcHTZF_BRNkmZqT2dVHTfprM8AyBw/exec';
 // ============================================================
 //  PARTIDOS
 // ============================================================
@@ -501,7 +502,29 @@ function markCard(id) {
   const h = document.getElementById('h-' + id).value;
   const a = document.getElementById('a-' + id).value;
   const card = document.getElementById('card-' + id);
-  if (h !== '' && a !== '') { card.style.borderColor = '#1a6e3a'; card.style.background = '#f4fbf6'; }
+  if (h !== '' && a !== '') {
+    card.style.borderColor = '#1a6e3a';
+    card.style.background = '#f4fbf6';
+  } else {
+    card.style.borderColor = '';
+    card.style.background = '';
+  }
+  updateCounter();
+}
+
+function updateCounter() {
+  let filled = 0;
+  MATCHES.forEach(m => {
+    const h = document.getElementById('h-' + m.id);
+    const a = document.getElementById('a-' + m.id);
+    if (h && a && h.value !== '' && a.value !== '') filled++;
+  });
+  const total = MATCHES.length;
+  const counter = document.getElementById('pred-counter');
+  if (!counter) return;
+  counter.textContent = filled + ' / ' + total + ' partidos pronosticados';
+  counter.style.color = filled === total ? 'var(--green-mid)' : (filled > 0 ? 'var(--pts1)' : 'var(--text-muted)');
+  counter.style.fontWeight = filled === total ? '700' : '500';
 }
 
 async function submitPredictions() {
@@ -523,7 +546,21 @@ async function submitPredictions() {
     const a = document.getElementById('a-' + m.id).value;
     if (h !== '' && a !== '') { predictions[m.id] = { home: parseInt(h), away: parseInt(a) }; filled++; }
   });
-  if (filled === 0) { showToast('⚠ Pronostica al menos un partido', true); return; }
+  const total = MATCHES.length;
+  if (filled < total) {
+    showToast('⚠ Debes pronosticar los ' + total + ' partidos. Te faltan ' + (total - filled) + '.', true);
+    // Highlight missing cards
+    MATCHES.forEach(m => {
+      const h = document.getElementById('h-' + m.id).value;
+      const a = document.getElementById('a-' + m.id).value;
+      if (h === '' || a === '') {
+        const card = document.getElementById('card-' + m.id);
+        card.style.borderColor = '#b91c1c';
+        card.style.background = '#fff5f5';
+      }
+    });
+    return;
+  }
 
   const btn = document.getElementById('btn-guardar');
   btn.disabled = true; btn.textContent = 'Guardando...';
