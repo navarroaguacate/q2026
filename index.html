@@ -285,7 +285,9 @@
 // ============================================================
 //  CONFIGURACIÓN
 // ============================================================
-const SCRIPT_URL     = 'https://script.google.com/macros/s/AKfycbz06Pz4vTS-0WiZAqcpxJEyoxRW70xR_XL7Lhjltb821SRLCswEdL3_64vp9qUuU7XZZg/exec';
+const SCRIPT_URL     = 'https://script.google.com/macros/s/AKfycbxRRke6MKqVcIo6zWEy5EhACfOQlg5Sl-Hr_MmE_FcHTZF_BRNkmZqT2dVHTfprM8AyBw/exec';
+// Last day to submit predictions (June 10, 2026 — 23:59:59 local time)
+const CUTOFF_DATE    = new Date('2026-06-10T23:59:59');
 // ============================================================
 //  PARTIDOS
 // ============================================================
@@ -474,6 +476,25 @@ function unlockFormCards() {
 }
 
 // ============================================================
+//  CUTOFF CHECK
+// ============================================================
+function isPastCutoff() {
+  return new Date() > CUTOFF_DATE;
+}
+
+function showCutoffBanner() {
+  const warning = document.getElementById('locked-warning');
+  warning.style.display = 'block';
+  warning.style.background = '#fee2e2';
+  warning.style.borderColor = '#fca5a5';
+  document.getElementById('locked-name').textContent = '';
+  warning.querySelector('h3').textContent = '⏰ Plazo de pronósticos cerrado';
+  warning.querySelector('p').textContent = 'El plazo para ingresar pronósticos venció el 10 de junio de 2026. Ya no es posible registrar nuevas predicciones.';
+  document.getElementById('btn-guardar').disabled = true;
+  lockFormCards();
+}
+
+// ============================================================
 //  PRONÓSTICOS FORM
 // ============================================================
 function buildPredictForm() {
@@ -496,6 +517,8 @@ function buildPredictForm() {
     });
   });
   document.getElementById('matches-form').innerHTML = html;
+  // Lock form if past cutoff
+  if (isPastCutoff()) showCutoffBanner();
 }
 
 function markCard(id) {
@@ -528,6 +551,7 @@ function updateCounter() {
 }
 
 async function submitPredictions() {
+  if (isPastCutoff()) { showToast('⏰ El plazo de pronósticos venció el 10 de junio.', true); return; }
   const name = document.getElementById('player-name').value.trim();
   if (!name) { showToast('⚠ Por favor ingresa tu nombre primero', true); return; }
 
